@@ -1,0 +1,115 @@
+/* External CSS File - styles.css */
+
+/* External CSS Box Styles */
+.external-box {
+    background-color: #e3f2fd;
+    border: 3px solid #2196F3;
+    border-radius: 10px;
+    padding: 25px;
+    margin-bottom: 30px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+}
+
+.external-title {
+    background-color: #2196F3;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-size: 20px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.external-info {
+    font-size: 18px;
+    color: #333;
+    margin: 10px 0;
+    font-weight: bold;
+}
+
+.external-button {
+    background-color: #2196F3;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    margin: 20px 0;
+    width: 100%;
+}
+
+.external-button:hover {
+    background-color: #1976D2;
+}
+
+.external-form {
+    display: none;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 5px;
+    margin-bottom: 15px;
+}
+
+.external-form h3 {
+    color: #2196F3;
+    margin-top: 0;
+}
+
+.external-form label {
+    color: #555;
+    font-weight: 500;
+    display: block;
+    margin-top: 10px;
+}
+
+.external-form input,
+.external-form select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0;
+    border: 2px solid #2196F3;
+    border-radius: 4px;
+    box-sizing: border-box;
+}
+
+.external-form input:focus,
+.external-form select:focus {
+    outline: none;
+    border-color: #1976D2;
+    box-shadow: 0 0 5px rgba(33, 150, 243, 0.3);
+}
+
+.external-submit {
+    background-color: #2196F3;
+    color: white;
+    padding: 12px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    width: 100%;
+    font-size: 16px;
+    margin-top: 15px;
+}
+
+.external-submit:hover {
+    background-color: #1976D2;
+}
+
+.external-css-info {
+    background-color: #bbdefb;
+    padding: 15px;
+    border-left: 4px solid #2196F3;
+    border-radius: 3px;
+    margin-top: 15px;
+}
+
+.external-css-info strong {
+    color: #0d47a1;
+}
+
+.external-css-info p {
+    margin: 5px 0;
+    color: #333;
+}

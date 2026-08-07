@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Grading System</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="calculator-card">
+        <div class="student-info">
+            <p><strong>Name:</strong>Nikita Punwatkar</p>
+            <p><strong>PRN:</strong> 24070521175</p>
+        </div>
+        <h2>📊 Student Grading Portal</h2>
+        <form id="gradeForm">
+            <!-- Math Input Group -->
+            <div class="input-group">
+                <label for="math">Mathematics Marks:</label>
+                <input type="text" id="math" placeholder="Enter score (0-100)">
+                <span class="error-msg" id="mathError"></span>
+            </div>
+
+            <!-- Science Input Group -->
+            <div class="input-group">
+                <label for="science">Science Marks:</label>
+                <input type="text" id="science" placeholder="Enter score (0-100)">
+                <span class="error-msg" id="scienceError"></span>
+            </div>
+
+            <!-- History Input Group -->
+            <div class="input-group">
+                <label for="history">History Marks:</label>
+                <input type="text" id="history" placeholder="Enter score (0-100)">
+                <span class="error-msg" id="historyError"></span>
+            </div>
+
+            <button type="submit" class="submit-btn">Calculate Grade</button>
+        </form>
+
+        <!-- Final Report Dynamic Block -->
+        <div id="resultsCard" class="results-card hidden">
+            <h3>Performance Summary</h3>
+            <p>Total Score: <span id="resTotal" class="bold-text"></span> / 300</p>
+            <p>Average Percentage: <span id="resPercent" class="bold-text"></span></p>
+            <p>Final Letter Grade: <span id="resGrade" class="badge"></span></p>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

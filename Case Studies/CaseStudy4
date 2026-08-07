@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Password Palindrome Checker</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fef2f2, #f0fdfa);
+      margin: 0;
+      padding: 0;
+      color: #111827;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      color: #b91c1c;
+      margin-top: 0;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+      gap: 6px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #b91c1c;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      background: #991b1b;
+    }
+
+    .message {
+      margin-top: 16px;
+      padding: 14px;
+      border-radius: 8px;
+      font-weight: bold;
+    }
+
+    .success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .error {
+      background: #fee2e2;
+      color: #b91c1c;
+    }
+
+    .info {
+      margin-top: 12px;
+      color: #4b5563;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Password Palindrome Checker</h1>
+    <p>Enter a password string and check whether it is a palindrome.</p>
+
+    <form id="passwordForm">
+      <label>
+        Password
+        <input id="passwordInput" type="password" placeholder="Enter password" />
+      </label>
+      <button type="button" id="checkPasswordBtn">Check Password</button>
+    </form>
+
+    <div id="messageBox" class="message">Your result will appear here.</div>
+    <div id="lengthInfo" class="info"></div>
+  </div>
+
+  <script>
+    function isPalindrome(text) {
+      const cleaned = text.toLowerCase().replace(/\s+/g, "");
+      const reversed = cleaned.split("").reverse().join("");
+      return cleaned === reversed;
+    }
+
+    function checkPasswordStrength(password) {
+      const hasUpperCase = /[A-Z]/.test(password);
+      const hasLowerCase = /[a-z]/.test(password);
+      const hasNumber = /\d/.test(password);
+      const hasSpecial = /[^A-Za-z0-9]/.test(password);
+
+      if (password.length < 8) {
+        return "Weak password: length should be at least 8 characters.";
+      }
+
+      if (!hasUpperCase || !hasLowerCase || !hasNumber || !hasSpecial) {
+        return "Weak password: include uppercase, lowercase, number, and special character.";
+      }
+
+      return "Strong password.";
+    }
+
+    const checkPasswordBtn = document.getElementById("checkPasswordBtn");
+    const messageBox = document.getElementById("messageBox");
+    const lengthInfo = document.getElementById("lengthInfo");
+
+    checkPasswordBtn.addEventListener("click", () => {
+      try {
+        const password = document.getElementById("passwordInput").value;
+
+        if (password.trim() === "") {
+          throw new Error("Please enter a password.");
+        }
+
+        const lengthMessage = checkPasswordStrength(password);
+        const result = isPalindrome(password);
+        const resultText = result
+          ? "This password is a palindrome string."
+          : "This password is not a palindrome string.";
+
+        lengthInfo.textContent = `Password length: ${password.length} characters. ${lengthMessage}`;
+
+        messageBox.className = "message success";
+        messageBox.textContent = resultText;
+      } catch (error) {
+        messageBox.className = "message error";
+        messageBox.textContent = error.message;
+      }
+    });
+  </script>
+</body>
+</html>

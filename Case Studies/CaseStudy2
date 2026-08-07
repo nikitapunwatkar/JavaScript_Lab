@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Grading System</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: linear-gradient(135deg, #fdf2f8, #eff6ff);
+      margin: 0;
+      padding: 0;
+      color: #111827;
+    }
+
+    .container {
+      max-width: 700px;
+      margin: 40px auto;
+      background: white;
+      padding: 24px;
+      border-radius: 16px;
+      box-shadow: 0 8px 24px rgba(0, 0, 0, 0.12);
+    }
+
+    h1 {
+      color: #7c3aed;
+      margin-top: 0;
+    }
+
+    form {
+      display: grid;
+      gap: 12px;
+    }
+
+    label {
+      display: flex;
+      flex-direction: column;
+      font-weight: bold;
+      gap: 6px;
+    }
+
+    input {
+      padding: 10px;
+      border: 1px solid #d1d5db;
+      border-radius: 8px;
+      font-size: 15px;
+    }
+
+    button {
+      padding: 12px 16px;
+      border: none;
+      border-radius: 8px;
+      background: #7c3aed;
+      color: white;
+      font-size: 16px;
+      cursor: pointer;
+      margin-top: 8px;
+    }
+
+    button:hover {
+      background: #6d28d9;
+    }
+
+    .error {
+      color: #dc2626;
+      font-weight: bold;
+      margin-top: 8px;
+    }
+
+    .result {
+      margin-top: 20px;
+      padding: 16px;
+      background: #f5f3ff;
+      border-left: 5px solid #7c3aed;
+      border-radius: 8px;
+    }
+
+    .notes {
+      margin-top: 20px;
+      background: #faf5ff;
+      padding: 14px;
+      border-radius: 8px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Student Grade Calculator</h1>
+    <p>Enter a student's name and marks to see the grade and feedback.</p>
+
+    <form id="gradeForm">
+      <label>
+        Student Name
+        <input id="studentName" type="text" placeholder="Enter student name" />
+      </label>
+      <label>
+        Marks (0-100)
+        <input id="marks" type="number" min="0" max="100" placeholder="Enter marks" />
+      </label>
+      <button type="button" id="calculateGradeBtn">Calculate Grade</button>
+    </form>
+
+    <div id="errorBox" class="error"></div>
+    <div id="resultBox" class="result">Your result will appear here.</div>
+
+    <div class="notes">
+      <h3>What this page demonstrates</h3>
+      <ul>
+        <li><strong>if/else if/else</strong> for grading logic</li>
+        <li><strong>switch</strong> for showing feedback messages</li>
+        <li><strong>form validation</strong> for empty and invalid marks</li>
+      </ul>
+    </div>
+  </div>
+
+  <script>
+    const calculateGradeBtn = document.getElementById("calculateGradeBtn");
+    const resultBox = document.getElementById("resultBox");
+    const errorBox = document.getElementById("errorBox");
+
+    calculateGradeBtn.addEventListener("click", () => {
+      const studentName = document.getElementById("studentName").value.trim();
+      const marksValue = document.getElementById("marks").value.trim();
+
+      errorBox.textContent = "";
+      resultBox.innerHTML = "";
+
+      if (studentName === "") {
+        errorBox.textContent = "Please enter the student's name.";
+        return;
+      }
+
+      if (marksValue === "") {
+        errorBox.textContent = "Please enter the marks.";
+        return;
+      }
+
+      const marks = Number(marksValue);
+
+      if (Number.isNaN(marks) || marks < 0 || marks > 100) {
+        errorBox.textContent = "Marks must be a number between 0 and 100.";
+        return;
+      }
+
+      let grade = "";
+      let remark = "";
+
+      if (marks >= 90) {
+        grade = "A+";
+        remark = "Excellent work!";
+      } else if (marks >= 80) {
+        grade = "A";
+        remark = "Very good performance.";
+      } else if (marks >= 70) {
+        grade = "B";
+        remark = "Good effort.";
+      } else if (marks >= 60) {
+        grade = "C";
+        remark = "Satisfactory.";
+      } else if (marks >= 40) {
+        grade = "D";
+        remark = "Needs improvement.";
+      } else {
+        grade = "F";
+        remark = "Fail. Please review the subject again.";
+      }
+
+      let feedback = "";
+      switch (grade) {
+        case "A+":
+        case "A":
+          feedback = "Outstanding achievement.";
+          break;
+        case "B":
+          feedback = "Strong result.";
+          break;
+        case "C":
+        case "D":
+          feedback = "You can improve with more practice.";
+          break;
+        default:
+          feedback = "Please seek help and improve your preparation.";
+      }
+
+      const gradeResult = {
+        student: studentName,
+        marks: marks,
+        grade: grade,
+        remark: remark,
+        feedback: feedback
+      };
+
+      const { student, marks: scoredMarks, grade: finalGrade, remark: finalRemark, feedback: finalFeedback } = gradeResult;
+
+      resultBox.innerHTML = `
+        <h3>Result for ${student}</h3>
+        <p><strong>Marks:</strong> ${scoredMarks}</p>
+        <p><strong>Grade:</strong> ${finalGrade}</p>
+        <p><strong>Remark:</strong> ${finalRemark}</p>
+        <p><strong>Feedback:</strong> ${finalFeedback}</p>
+      `;
+    });
+  </script>
+</body>
+</html>

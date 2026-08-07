@@ -1,0 +1,87 @@
+ <!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Records - Nikita Punwatkar</title>
+    
+    <!-- INTERNAL CSS FOR THE STUDENT INFO PAGE -->
+    <style>
+        html, body {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background-color: #f4f4f9;
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            width: 700px;
+            background: white;
+            padding: 50px;
+            border-radius: 16px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            box-sizing: border-box;
+        }
+        
+        /* Your custom colors and pixel sizes */
+        .line-1 { color: #e63946; font-size: 36px; font-weight: bold; margin-bottom: 12px; }
+        .line-2 { color: #457b9d; font-size: 30px; font-weight: bold; margin-bottom: 24px; }
+        .line-3 { color: #1d3557; font-size: 26px; text-decoration: underline; margin-bottom: 16px; }
+        .line-4 { color: #2a9d8f; font-size: 22px; margin-bottom: 10px; }
+        .line-5 { color: #f4a261; font-size: 22px; margin-bottom: 10px; }
+        .line-6 { color: #e76f51; font-size: 22px; margin-bottom: 30px; }
+        .line-8 { color: #8338ec; font-size: 26px; font-weight: bold; margin-top: 15px; margin-bottom: 35px; }
+
+        /* Icon Box Styled Back Button */
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            padding: 18px 36px;
+            border-radius: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            width: 100%;
+            box-sizing: border-box;
+            transition: background 0.2s;
+        }
+        .back-btn:hover { background-color: #0056b3; }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <!-- Lines styled with unique internal CSS colors -->
+        <div class="line-1">Welcome to internal CSS</div>
+        <div class="line-2">Welcome to javascript demo</div>
+        
+        <div class="line-3">User Information</div>
+        <div class="line-4"><strong>Name:</strong> Nikita Punwatkar</div>
+        <div class="line-5"><strong>PRN:</strong> 24070521175</div>
+        <div class="line-6"><strong>Branch:</strong> Computer Science Engineering</div>
+        
+        <!-- Line styled with unique Inline CSS color -->
+        <div style="color: #2b9348; font-size: 26px; font-weight: bold; margin-top: 20px;">
+            Welcome to inline CSS
+        </div>
+        
+        <div class="line-8">Welcome to java script programming</div>
+
+        <!-- WORKING LINK: Points directly back to your index.html file -->
+        <a href="index.html" class="back-btn">
+            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+                <line x1="19" y1="12" x2="5" y2="12"></line>
+                <polyline points="12 19 5 12 12 5"></polyline>
+            </svg>
+            Back to Department Page
+        </a>
+    </div>
+
+</body>
+</html>

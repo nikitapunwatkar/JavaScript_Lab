@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Experiment - Billing Calculator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 30px;
+            line-height: 1.6;
+            background-color: #f4f4f4;
+        }
+        .container {
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            max-width: 900px;
+            margin: 0 auto;
+        }
+        h1 {
+            color: #333;
+            border-bottom: 3px solid #007bff;
+            padding-bottom: 10px;
+        }
+        h2 {
+            color: #007bff;
+            margin-top: 25px;
+        }
+        h3 {
+            color: #555;
+        }
+        .section {
+            margin-bottom: 30px;
+        }
+        .info-box {
+            background-color: #e7f3ff;
+            border-left: 4px solid #007bff;
+            padding: 15px;
+            margin: 15px 0;
+        }
+        .code-block {
+            background-color: #f8f9fa;
+            border: 1px solid #ddd;
+            padding: 15px;
+            border-radius: 4px;
+            font-family: 'Courier New', monospace;
+            overflow-x: auto;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 15px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+        }
+        tr:nth-child(even) {
+            background-color: #f9f9f9;
+        }
+        .footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 2px solid #ddd;
+            text-align: center;
+            color: #666;
+            font-size: 12px;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Experiment Report: Billing Calculator Application</h1>
+    
+    <!-- Section 1: Experiment No. and Title -->
+    <div class="section">
+        <h2>1. Experiment No. & Title</h2>
+        <div class="info-box">
+            <strong>Experiment No.:</strong> Web Development - JavaScript Fundamentals<br>
+            <strong>Title:</strong> Billing Calculator using HTML and JavaScript
+        </div>
+    </div>
+
+    <!-- Section 2: Software/Tools Required -->
+    <div class="section">
+        <h2>2. Software/Tools Required</h2>
+        <table>
+            <tr>
+                <th>Tool/Software</th>
+                <th>Version</th>
+                <th>Purpose</th>
+            </tr>
+            <tr>
+                <td>HTML5</td>
+                <td>5.0+</td>
+                <td>Markup language for document structure</td>
+            </tr>
+            <tr>
+                <td>JavaScript (ES6+)</td>
+                <td>ES6 or higher</td>
+                <td>Programming language for business logic</td>
+            </tr>
+            <tr>
+                <td>Web Browser</td>
+                <td>Chrome, Firefox, Edge, Safari</td>
+                <td>Runtime environment to execute the code</td>
+            </tr>
+            <tr>
+                <td>Text Editor</td>
+                <td>VS Code, Notepad++, Sublime Text</td>
+                <td>Code editing and development</td>
+            </tr>
+        </table>
+    </div>
+
+    <!-- Section 3: Theory -->
+    <div class="section">
+        <h2>3. Theory</h2>
+        
+        <h3>3.1 Overview</h3>
+        <p>
+            A billing calculator is a web application that computes the total bill amount for products including 
+            taxes (GST - Goods and Services Tax). This experiment demonstrates fundamental JavaScript concepts 
+            including variables, user input handling, arithmetic operations, object manipulation, destructuring, 
+            and dynamic HTML generation.
+        </p>
+
+        <h3>3.2 Key Concepts</h3>
+        
+        <h4>3.2.1 Variables and Data Types</h4>
+        <div class="info-box">
+            <strong>Definition:</strong> Variables store data values that can be used and manipulated throughout the program.<br>
+            <strong>Types Used:</strong>
+            <ul>
+                <li><strong>String:</strong> Text data (Customer Name, Product Name)</li>
+                <li><strong>Number:</strong> Numerical values (Quantity, Price, Total)</li>
+                <li><strong>Constant:</strong> Fixed values (GST rate = 0.18)</li>
+            </ul>
+        </div>
+
+        <h4>3.2.2 GST Calculation (Goods and Services Tax)</h4>
+        <p>
+            GST is an indirect tax applicable in India and many other countries. In this application:
+        </p>
+        <ul>
+            <li><strong>GST Rate:</strong> 18% (defined as constant 0.18)</li>
+            <li><strong>Formula:</strong> GST Amount = Total Amount × GST Rate</li>
+            <li><strong>Final Bill:</strong> Final Bill = Total Amount + GST Amount</li>
+        </ul>
+        <div class="code-block">
+Example Calculation:<br>
+If Quantity = 5, Price = 100<br>
+Total = 5 × 100 = ₹500<br>
+GST = 500 × 0.18 = ₹90<br>
+Final Bill = 500 + 90 = ₹590
+        </div>
+
+        <h4>3.2.3 User Input with prompt()</h4>
+        <p>
+            The <code>prompt()</code> function displays a dialog box to collect user input. The syntax is:
+        </p>
+        <div class="code-block">
+var variable = prompt("Enter a value");
+        </div>
+        <p>
+            It returns a string, which is converted to a number using the <code>Number()</code> constructor for numerical operations.
+        </p>
+
+        <h4>3.2.4 Input Validation</h4>
+        <p>
+            Input validation ensures data integrity by checking:
+        </p>
+        <div class="code-block">
+if (isNaN(quantity) || quantity &lt; 0) quantity = 0;<br>
+if (isNaN(price) || price &lt; 0) price = 0;
+        </div>
+        <ul>
+            <li><code>isNaN()</code> - Checks if a value is Not a Number</li>
+            <li>Negative value check - Prevents invalid negative prices/quantities</li>
+            <li>Default value - Sets invalid inputs to 0</li>
+        </ul>
+
+        <h4>3.2.5 JavaScript Objects</h4>
+        <p>
+            Objects are collections of key-value pairs used to store related data:
+        </p>
+        <div class="code-block">
+const bill = {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;customer: customerName,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;product: productName,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;quantity: quantity,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;price: price,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;total: total,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gstAmount: gstAmount,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;finalBill: finalBill<br>
+};
+        </div>
+
+        <h4>3.2.6 Object Destructuring</h4>
+        <p>
+            Destructuring extracts specific properties from an object and assigns them to new variables:
+        </p>
+        <div class="code-block">
+const {<br>
+&nbsp;&nbsp;&nbsp;&nbsp;customer,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;product,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;gstAmount: gst,<br>
+&nbsp;&nbsp;&nbsp;&nbsp;finalBill: amount<br>
+} = bill;
+        </div>
+        <p>
+            This creates new variables from object properties. Notice <code>gstAmount: gst</code> renames the property 
+            during extraction.
+        </p>
+
+        <h4>3.2.7 Template Literals</h4>
+        <p>
+            Template literals (backtick strings) allow embedding expressions using <code>${expression}</code> syntax:
+        </p>
+        <div class="code-block">
+document.write(`&lt;p&gt;Customer: ${customer}&lt;/p&gt;`);<br>
+document.write(`&lt;p&gt;Final Bill: ₹${amount.toFixed(2)}&lt;/p&gt;`);
+        </div>
+
+        <h4>3.2.8 Number Formatting with toFixed()</h4>
+        <p>
+            The <code>toFixed(n)</code> method formats numbers to n decimal places:
+        </p>
+        <div class="code-block">
+${price.toFixed(2)} // Displays: ₹100.50<br>
+${gst.toFixed(2)}   // Displays: ₹90.00
+        </div>
+
+        <h4>3.2.9 Dynamic HTML Generation</h4>
+        <p>
+            The <code>document.write()</code> method generates HTML content dynamically:
+        </p>
+        <div class="code-block">
+document.write(`&lt;h3&gt;Billing Receipt&lt;/h3&gt;`);
+        </div>
+
+        <h3>3.3 Algorithm Flow</h3>
+        <ol>
+            <li>Define GST constant (18%)</li>
+            <li>Collect customer name via prompt</li>
+            <li>Collect product name via prompt</li>
+            <li>Collect quantity and validate input</li>
+            <li>Collect price and validate input</li>
+            <li>Calculate total = quantity × price</li>
+            <li>Calculate GST amount = total × 0.18</li>
+            <li>Calculate final bill = total + GST amount</li>
+            <li>Create billing object with all values</li>
+            <li>Extract required values using destructuring</li>
+            <li>Generate and display formatted billing receipt</li>
+        </ol>
+
+        <h3>3.4 Advantages of This Approach</h3>
+        <ul>
+            <li>✓ Simple and user-friendly interface</li>
+            <li>✓ Input validation prevents errors</li>
+            <li>✓ Object organization keeps data structured</li>
+            <li>✓ Destructuring improves code readability</li>
+            <li>✓ Template literals make output generation clean</li>
+            <li>✓ Accurate decimal formatting for currency</li>
+        </ul>
+    </div>
+
+    <!-- Section 4: Expected Output -->
+    <div class="section">
+        <h2>4. Expected Output</h2>
+        <div class="info-box">
+            <strong>Sample Input:</strong><br>
+            Customer Name: NikitaS<br>
+            Product Name: Laptop<br>
+            Quantity: 1<br>
+            Price per Item: 50000<br><br>
+            
+            <strong>Expected Output Display:</strong><br>
+            <pre>Billing Receipt
+Customer: NikitaS
+Product: Laptop
+Quantity: 1
+Price per Item: ₹50000.00
+Total: ₹50000.00
+GST (18%): ₹9000.00
+Final Bill: ₹59000.00</pre>
+        </div>
+        <p>
+            Note: Output includes currency symbol (₹), proper decimal formatting (.toFixed(2)), 
+            and complete billing breakdown.
+        </p>
+    </div>
+
+    <!-- Section 5: Result/Conclusion -->
+    <div class="section">
+        <h2>5. Result/Conclusion</h2>
+        
+        <h3>5.1 Observations</h3>
+        <ul>
+            <li>The billing calculator successfully computes accurate bills with GST calculations</li>
+            <li>Input validation prevents errors from invalid or negative values</li>
+            <li>Object destructuring provides clean access to required data</li>
+            <li>Template literals generate formatted output efficiently</li>
+            <li>The application demonstrates practical use of JavaScript in web development</li>
+        </ul>
+
+        <h3>5.2 Key Learnings</h3>
+        <ul>
+            <li><strong>Variables & Data Types:</strong> Properly declaring and using different data types</li>
+            <li><strong>User Input:</strong> Collecting and validating user data</li>
+            <li><strong>Object-Oriented Programming:</strong> Organizing data in objects</li>
+            <li><strong>ES6 Features:</strong> Using modern JavaScript features like destructuring and template literals</li>
+            <li><strong>Business Logic:</strong> Implementing real-world calculations (GST, tax)</li>
+        </ul>
+
+        <h3>5.3 Conclusion</h3>
+        <p>
+            The Billing Calculator experiment successfully demonstrates core JavaScript concepts 
+            applied to a real-world scenario. It showcases how variables, objects, input validation, 
+            arithmetic operations, and ES6 features can be combined to create a functional web application. 
+            This application can be extended with features like:
+        </p>
+        <ul>
+            <li>Multiple items billing</li>
+            <li>Discount calculations</li>
+            <li>Payment method selection</li>
+            <li>Invoice history storage</li>
+            <li>Database integration</li>
+        </ul>
+
+        <h3>5.4 Future Enhancements</h3>
+        <ul>
+            <li>Add form-based input instead of prompt dialogs</li>
+            <li>Implement multiple product billing</li>
+            <li>Add discount percentage calculation</li>
+            <li>Generate printable invoices</li>
+            <li>Store billing history locally</li>
+            <li>Add different GST rates based on product categories</li>
+        </ul>
+    </div>
+
+    <div class="footer">
+        <p><strong>Student Name:</strong> Ritika | <strong>Date:</strong> 14/07/2026</p>
+        <p><strong>File Path:</strong> c:\Users\sit.lab3\Desktop\exp 2\ritika_1225.html</p>
+        <p>Billing Calculator Experiment - Web Development using HTML & JavaScript</p>
+    </div>
+</div>
+
+</body>
+</html>

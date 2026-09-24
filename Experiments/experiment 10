@@ -1,0 +1,264 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Data Viewer</title>
+
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            padding: 30px;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #172554, #4f46e5);
+        }
+
+        .container {
+            max-width: 900px;
+            margin: auto;
+        }
+
+        .header, .card {
+            background: white;
+            padding: 25px;
+            border-radius: 15px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,.2);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin: 0;
+        }
+
+        h2 {
+            color: #334155;
+        }
+
+        p {
+            color: #64748b;
+        }
+
+        .student {
+            text-align: right;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+        button {
+            padding: 11px 18px;
+            margin: 5px;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            background: #4f46e5;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        button:hover {
+            background: #3730a3;
+        }
+
+        .jquery {
+            background: #0891b2;
+        }
+
+        .jquery:hover {
+            background: #0e7490;
+        }
+
+        table {
+            width: 100%;
+            margin-top: 20px;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: #1e3a8a;
+            color: white;
+            padding: 12px;
+        }
+
+        td {
+            padding: 11px;
+            border-bottom: 1px solid #ddd;
+            text-align: center;
+        }
+
+        tr:hover {
+            background: #f1f5f9;
+        }
+
+        #status {
+            margin-top: 15px;
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        @media(max-width:600px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .student {
+                text-align: left;
+                margin-top: 15px;
+            }
+
+            .table-box {
+                overflow-x: auto;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>JSON Data Viewer</h1>
+            <p>Fetch API & jQuery $.getJSON()</p>
+        </div>
+
+        <div class="student">
+            Nikita Punwatkar<br>
+            PRN: 24070521175
+        </div>
+    </div>
+
+
+    <div class="card">
+
+        <h2>Load JSON Data</h2>
+
+        <button onclick="loadFetch()">
+            Load using fetch()
+        </button>
+
+        <button class="jquery" onclick="loadJQuery()">
+            Load using $.getJSON()
+        </button>
+
+        <div id="status"></div>
+
+        <div class="table-box">
+            <table id="dataTable">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Username</th>
+                        <th>Email</th>
+                        <th>City</th>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr>
+                        <td colspan="5">
+                            Click a button to load data
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+const url =
+    "https://jsonplaceholder.typicode.com/users";
+
+
+// Display JSON data in table
+function displayData(data) {
+
+    let rows = "";
+
+    data.forEach(user => {
+
+        rows += `
+            <tr>
+                <td>${user.id}</td>
+                <td>${user.name}</td>
+                <td>${user.username}</td>
+                <td>${user.email}</td>
+                <td>${user.address.city}</td>
+            </tr>
+        `;
+
+    });
+
+    document.querySelector("#dataTable tbody").innerHTML = rows;
+}
+
+
+// Using fetch()
+async function loadFetch() {
+
+    try {
+
+        const response = await fetch(url);
+        const data = await response.json();
+
+        displayData(data);
+
+        document.getElementById("status").textContent =
+            "✓ Data loaded using fetch()";
+
+    } catch (error) {
+
+        document.getElementById("status").textContent =
+            "Error loading data.";
+
+    }
+}
+
+
+// Using jQuery $.getJSON()
+function loadJQuery() {
+
+    $.getJSON(url)
+        .done(function(data) {
+
+            displayData(data);
+
+            document.getElementById("status").textContent =
+                "✓ Data loaded using jQuery $.getJSON()";
+
+        })
+        .fail(function() {
+
+            document.getElementById("status").textContent =
+                "Error loading data.";
+
+        });
+}
+
+</script>
+
+</body>
+</html>
+```

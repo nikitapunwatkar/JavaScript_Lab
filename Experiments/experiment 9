@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Theme Preferences</title>
+    <style>
+        :root {
+            --bg-color: #ffffff;
+            --text-color: #333333;
+            --card-bg: #f4f4f9;
+        }
+
+        [data-theme="dark"] {
+            --bg-color: #1e1e2e;
+            --text-color: #f5e0dc;
+            --card-bg: #252538;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-color);
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            transition: background-color 0.3s, color 0.3s;
+        }
+
+        .container {
+            text-align: center;
+            background: var(--card-bg);
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            width: 320px;
+        }
+
+        h1 {
+            margin-bottom: 5px;
+            font-size: 2rem;
+        }
+
+        h3 {
+            margin-top: 0;
+            font-weight: 400;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .btn-group {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 10px;
+            margin-bottom: 15px;
+        }
+
+        button {
+            padding: 12px;
+            font-size: 0.9rem;
+            font-weight: bold;
+            border: none;
+            border-radius: 6px;
+            cursor: pointer;
+            transition: transform 0.1s, opacity 0.2s;
+        }
+
+        button:hover {
+            opacity: 0.9;
+            transform: scale(1.02);
+        }
+
+        .btn-local { background-color: #4ed9a8; color: #111; }
+        .btn-session { background-color: #a586ff; color: #fff; }
+        
+        .btn-clear {
+            grid-column: span 2;
+            background-color: #ff6b6b;
+            color: white;
+            margin-top: 5px;
+        }
+
+        .status-panel {
+            margin-top: 20px;
+            padding: 12px;
+            background: rgba(0, 0, 0, 0.05);
+            border-radius: 6px;
+            font-size: 0.85rem;
+            text-align: left;
+        }
+
+        [data-theme="dark"] .status-panel {
+            background: rgba(255, 255, 255, 0.05);
+        }
+
+        .status-line {
+            margin: 4px 0;
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1>Nikita punwatkar</h1>
+        <h3>PRN : 24070521175</h3>
+        
+        <div class="btn-group">
+            <button class="btn-local" onclick="setLocalTheme('dark')">Dark (Save Local)</button>
+            <button class="btn-local" onclick="setLocalTheme('light')">Light (Save Local)</button>
+            <button class="btn-session" onclick="setSessionTheme('dark')">Dark (Save Session)</button>
+            <button class="btn-session" onclick="setSessionTheme('light')">Light (Save Session)</button>
+            <button class="btn-clear" onclick="clearAllPreferences()">Clear All Preferences</button>
+        </div>
+
+        <div class="status-panel">
+            <strong>Storage Status:</strong>
+            <div class="status-line">Local Storage: <span id="local-status">empty</span></div>
+            <div class="status-line">Session Storage: <span id="session-status">empty</span></div>
+        </div>
+    </div>
+
+    <script>
+        // Update the visual status indicators on the screen
+        function updateStatusDisplay() {
+            const localTheme = localStorage.getItem('theme');
+            const sessionTheme = sessionStorage.getItem('theme');
+
+            document.getElementById('local-status').textContent = localTheme ? localTheme : 'empty';
+            document.getElementById('session-status').textContent = sessionTheme ? sessionTheme : 'empty';
+        }
+
+        // Apply saved preference immediately on load
+        function applySavedTheme() {
+            const sessionTheme = sessionStorage.getItem('theme');
+            const localTheme = localStorage.getItem('theme');
+
+            if (sessionTheme) {
+                document.documentElement.setAttribute('data-theme', sessionTheme);
+            } else if (localTheme) {
+                document.documentElement.setAttribute('data-theme', localTheme);
+            } else {
+                document.documentElement.removeAttribute('data-theme'); // default fallback
+            }
+            updateStatusDisplay();
+        }
+
+        // Action for Local Storage buttons
+        function setLocalTheme(theme) {
+            sessionStorage.removeItem('theme'); // Clear rival storage to prevent cross-contamination
+            localStorage.setItem('theme', theme);
+            applySavedTheme();
+        }
+
+        // Action for Session Storage buttons
+        function setSessionTheme(theme) {
+            localStorage.removeItem('theme'); // Clear rival storage to prevent cross-contamination
+            sessionStorage.setItem('theme', theme);
+            applySavedTheme();
+        }
+
+        // Reset all preferences
+        function clearAllPreferences() {
+            localStorage.removeItem('theme');
+            sessionStorage.removeItem('theme');
+            applySavedTheme();
+        }
+
+        // Initialize state check
+        applySavedTheme();
+    </script>
+</body>
+</html>

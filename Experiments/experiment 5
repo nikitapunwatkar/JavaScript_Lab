@@ -1,0 +1,259 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart Calculator</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            background: linear-gradient(135deg, #172554, #4f46e5);
+            min-height: 100vh;
+            padding: 30px;
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .header, .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin: 0 0 5px;
+        }
+
+        h2 {
+            color: #334155;
+        }
+
+        p {
+            color: #64748b;
+        }
+
+        .student {
+            text-align: right;
+        }
+
+        .student strong {
+            color: #4f46e5;
+        }
+
+        .cart-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .cart-item:last-child {
+            border-bottom: none;
+        }
+
+        .price {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 15px;
+        }
+
+        button:hover {
+            background: #3730a3;
+        }
+
+        .summary {
+            background: #f8fafc;
+            padding: 18px;
+            border-radius: 10px;
+            margin-top: 20px;
+        }
+
+        .row {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px 0;
+        }
+
+        .discount {
+            color: #16a34a;
+        }
+
+        .total {
+            border-top: 2px solid #cbd5e1;
+            padding-top: 12px;
+            font-size: 21px;
+            font-weight: bold;
+            color: #1e3a8a;
+        }
+
+        .concepts {
+            margin-top: 20px;
+            padding: 15px;
+            background: #eef2ff;
+            border-radius: 10px;
+            color: #475569;
+        }
+
+        code {
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        @media(max-width:600px) {
+            .header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .student {
+                text-align: left;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>Shopping Cart</h1>
+            <p>Array Methods & Object Handling</p>
+        </div>
+
+        <div class="student">
+            <strong>Nikita Punwatkar</strong><br>
+            PRN: 24070521175
+        </div>
+    </div>
+
+    <div class="card">
+        <h2>Cart Items</h2>
+
+        <div id="cart"></div>
+
+        <button onclick="calculateTotal()">
+            Calculate Total
+        </button>
+
+        <div id="result"></div>
+    </div>
+
+    <div class="card concepts">
+        <strong>JavaScript Concepts:</strong><br><br>
+
+        <code>map()</code> – displays cart items &nbsp; |
+        <code>filter()</code> – filters items &nbsp; |
+        <code>reduce()</code> – calculates total<br><br>
+
+        <code>Objects</code> – stores product details &nbsp; |
+        <code>Discount Logic</code> – applies discount based on total
+    </div>
+
+</div>
+
+
+<script>
+
+    // Array of objects
+    const cart = [
+        { name: "Wireless Headphones", price: 1200, quantity: 1 },
+        { name: "Smart Watch", price: 2500, quantity: 1 },
+        { name: "USB Cable", price: 300, quantity: 2 },
+        { name: "Phone Stand", price: 500, quantity: 1 }
+    ];
+
+
+    // Display cart using map()
+    document.getElementById("cart").innerHTML =
+        cart.map(item => `
+            <div class="cart-item">
+                <span>
+                    <strong>${item.name}</strong>
+                    <br>
+                    Qty: ${item.quantity}
+                </span>
+
+                <span class="price">
+                    ₹${item.price * item.quantity}
+                </span>
+            </div>
+        `).join("");
+
+
+    function calculateTotal() {
+
+        // reduce() calculates total
+        let total = cart.reduce(
+            (sum, item) =>
+                sum + item.price * item.quantity, 0
+        );
+
+
+        // Discount logic
+        let discount = total >= 4000 ? total * 0.10 : 0;
+
+        let finalAmount = total - discount;
+
+
+        document.getElementById("result").innerHTML = `
+            <div class="summary">
+
+                <div class="row">
+                    <span>Subtotal</span>
+                    <strong>₹${total}</strong>
+                </div>
+
+                <div class="row discount">
+                    <span>Discount (10%)</span>
+                    <strong>- ₹${discount}</strong>
+                </div>
+
+                <div class="row total">
+                    <span>Final Total</span>
+                    <span>₹${finalAmount}</span>
+                </div>
+
+            </div>
+        `;
+    }
+
+</script>
+
+</body>
+</html>
+```

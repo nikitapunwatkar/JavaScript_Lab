@@ -1,0 +1,265 @@
+```html
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>String Functions & Regular Expressions</title>
+
+    <style>
+        * {
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            margin: 0;
+            min-height: 100vh;
+            padding: 30px;
+            background: linear-gradient(135deg, #172554, #4f46e5);
+        }
+
+        .container {
+            max-width: 850px;
+            margin: auto;
+        }
+
+        .header, .card {
+            background: white;
+            border-radius: 15px;
+            padding: 25px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 25px rgba(0,0,0,.2);
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+        }
+
+        h1 {
+            color: #1e3a8a;
+            margin: 0;
+        }
+
+        h2 {
+            color: #334155;
+        }
+
+        p {
+            color: #64748b;
+        }
+
+        .student {
+            text-align: right;
+            color: #4f46e5;
+            font-weight: bold;
+        }
+
+        label {
+            display: block;
+            margin: 12px 0 6px;
+            font-weight: bold;
+            color: #334155;
+        }
+
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #cbd5e1;
+            border-radius: 8px;
+            outline: none;
+            font-size: 15px;
+        }
+
+        textarea {
+            height: 120px;
+            resize: vertical;
+        }
+
+        button {
+            width: 100%;
+            padding: 13px;
+            margin-top: 15px;
+            border: none;
+            border-radius: 8px;
+            background: #4f46e5;
+            color: white;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background: #3730a3;
+        }
+
+        .result {
+            margin-top: 20px;
+            padding: 18px;
+            background: #f8fafc;
+            border-radius: 10px;
+            line-height: 1.8;
+        }
+
+        .valid {
+            color: #16a34a;
+            font-weight: bold;
+        }
+
+        .invalid {
+            color: #dc2626;
+            font-weight: bold;
+        }
+
+        code {
+            color: #7c3aed;
+            font-weight: bold;
+        }
+
+        @media(max-width:600px) {
+            .header {
+                flex-direction: column;
+            }
+
+            .student {
+                text-align: left;
+                margin-top: 15px;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+<div class="container">
+
+    <div class="header">
+        <div>
+            <h1>String & Regex Analyzer</h1>
+            <p>JavaScript String Functions and Regular Expressions</p>
+        </div>
+
+        <div class="student">
+            Nikita Punwatkar<br>
+            PRN: 24070521175
+        </div>
+    </div>
+
+
+    <div class="card">
+
+        <h2>Text Analysis</h2>
+
+        <label>Enter Email</label>
+
+        <input
+            type="text"
+            id="email"
+            placeholder="example@gmail.com"
+        >
+
+        <label>Enter Text</label>
+
+        <textarea
+            id="text"
+            placeholder="Example: My name is Nikita. I am learning JavaScript."
+        ></textarea>
+
+        <button onclick="analyze()">
+            Analyze Text
+        </button>
+
+        <div id="result"></div>
+
+    </div>
+
+</div>
+
+
+<script>
+
+function analyze() {
+
+    const email =
+        document.getElementById("email").value.trim();
+
+    const text =
+        document.getElementById("text").value.trim();
+
+
+    // Regular expression for email validation
+    const emailRegex =
+        /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+
+    const emailResult =
+        emailRegex.test(email);
+
+
+    // String functions
+    const upper =
+        text.toUpperCase();
+
+    const lower =
+        text.toLowerCase();
+
+    const words =
+        text.split(/\s+/).filter(Boolean);
+
+    const wordCount =
+        words.length;
+
+    const charCount =
+        text.length;
+
+
+    // Regular expression for extracting numbers
+    const numbers =
+        text.match(/\d+/g) || [];
+
+
+    // Extract capitalized words
+    const capitalWords =
+        text.match(/\b[A-Z][a-z]*\b/g) || [];
+
+
+    document.getElementById("result").innerHTML = `
+
+        <div class="result">
+
+            <strong>Email Validation:</strong><br>
+
+            <span class="${emailResult ? 'valid' : 'invalid'}">
+                ${emailResult ? "✓ Valid Email" : "✗ Invalid Email"}
+            </span>
+
+            <hr>
+
+            <strong>Text Analysis:</strong><br>
+
+            Characters: ${charCount}<br>
+
+            Words: ${wordCount}<br>
+
+            Uppercase:
+            ${upper}<br>
+
+            Lowercase:
+            ${lower}<br>
+
+            Extracted Numbers:
+            ${numbers.length ? numbers.join(", ") : "None"}<br>
+
+            Extracted Capitalized Words:
+            ${capitalWords.length ? capitalWords.join(", ") : "None"}
+
+        </div>
+    `;
+}
+
+</script>
+
+</body>
+</html>
+```
